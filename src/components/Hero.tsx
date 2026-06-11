@@ -31,7 +31,7 @@ export function Hero(): React.JSX.Element {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/70 px-3 py-1 text-[12.5px] font-medium text-muted-foreground backdrop-blur-sm shadow-apple-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            v0.1.0
+            v0.3.0
             <span className="text-black/20">·</span>
             zero runtime deps
             <span className="text-black/20">·</span>

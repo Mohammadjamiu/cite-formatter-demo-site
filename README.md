@@ -2,7 +2,9 @@
 
 Landing page for the [cite-formatter](https://www.npmjs.com/package/cite-formatter) npm package.
 
-The interactive demo on this site consumes the **real published package** from npm — no mocks, no fixtures. If the page renders, the package works.
+The interactive demo consumes the **real published** `cite-formatter` package from npm (`^0.3.0`) — no mocks. If the page renders, the published package resolves and runs in the browser.
+
+For local library development without publishing, you can temporarily point at a sibling checkout with `"cite-formatter": "file:../cite-formatter"` in `package.json`.
 
 ## Stack
 
@@ -13,7 +15,7 @@ The interactive demo on this site consumes the **real published package** from n
   - [class-variance-authority](https://cva.style) for variant-driven component APIs
   - [lucide-react](https://lucide.dev) for icons
 - Design language: Apple-clean — generous whitespace, hairline borders, restrained teal accent, smooth `cubic-bezier(0.4, 0, 0.2, 1)` motion
-- `cite-formatter@^0.1.0` from npm (no file: linking)
+- `cite-formatter@^0.3.0` from npm
 
 ## Develop
 
@@ -77,7 +79,7 @@ npm run preview
         ├── Hero.tsx                 Headline + install command + CTAs
         ├── Features.tsx             6-card feature grid (lucide icons)
         ├── Demo.tsx                 Live demo: textareas, select, checkbox, result
-        ├── InstallSection.tsx       Three dark code blocks (install, usage, CLI)
+        ├── InstallSection.tsx       Dark code blocks: install, usage, modifiers, CLI
         ├── SiteFooter.tsx           Footer
         └── ui/                      shadcn primitives
             ├── button.tsx

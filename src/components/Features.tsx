@@ -2,7 +2,7 @@ import {
   Library,
   ListOrdered,
   Wrench,
-  FileCode2,
+  Parentheses,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -37,10 +37,10 @@ const features: ReadonlyArray<{
       "Need a house style? registerFormat() takes a name, a detector, and a renderer. The rest of the API stays the same.",
   },
   {
-    icon: FileCode2,
-    title: "Three output shapes",
+    icon: Parentheses,
+    title: "Grouping & modifiers",
     description:
-      "In-place strings, in-place arrays of paragraphs, or a structured BibTeX export for downstream tooling.",
+      "Chain adjacent [CITE:id] tags into one parenthetical; add |p=12 or |narrative per tag. APA, Chicago, and Harvard add 2020a/2020b when the same author-year appears twice.",
   },
   {
     icon: ShieldCheck,

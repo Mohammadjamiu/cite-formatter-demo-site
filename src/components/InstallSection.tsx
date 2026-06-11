@@ -19,7 +19,20 @@ const { content, references, missingIds } = compileCitations({
 console.log(content);
 console.log("\\nReferences:\\n" + references.join("\\n\\n"));`;
 
-const CLI = `npx cite-formatter --format apa --in chapter.md --refs refs.json --out chapter.cited.md`;
+const CLI = `npx cite-formatter chapter.md refs.json --format apa -o chapter.cited.md`;
+
+const MODIFIERS = `// v0.3+ — adjacent tags merge (APA: one parenthetical; IEEE: sorted / ranges).
+// Modifiers after the id (pipe-separated):
+//   [CITE:smith2023|p=12]           page for this cite only
+//   [CITE:smith2023|narrative]      "Smith (2023)" instead of "(Smith, 2023)"
+//   [CITE:smith2023|narrative|p=12] combined
+
+compileCitations({
+  content: "See [CITE:a][CITE:b] and [CITE:a|p=7].",
+  citations: myPool,
+  format: "apa",
+  groupAdjacent: true, // default; false → one bracket per tag
+});`;
 
 function CodeBlock({
   code,
@@ -91,6 +104,7 @@ export function InstallSection(): React.JSX.Element {
         <div className="mx-auto max-w-3xl space-y-5">
           <CodeBlock code={INSTALL} language="terminal" />
           <CodeBlock code={USAGE} language="typescript" />
+          <CodeBlock code={MODIFIERS} language="typescript" />
           <CodeBlock code={CLI} language="terminal" />
         </div>
       </div>

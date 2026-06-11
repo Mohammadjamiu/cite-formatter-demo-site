@@ -28,6 +28,7 @@ export function Demo(): React.JSX.Element {
   );
   const [format, setFormat] = useState<string>("apa");
   const [throwOnMissing, setThrowOnMissing] = useState<boolean>(false);
+  const [groupAdjacent, setGroupAdjacent] = useState<boolean>(true);
 
   const [output, setOutput] = useState<string>("");
   const [status, setStatus] = useState<Status>({ kind: "idle" });
@@ -56,6 +57,7 @@ export function Demo(): React.JSX.Element {
           citations,
           format,
           onMissing,
+          groupAdjacent,
         });
         const parts: string[] = [result.content];
         if (result.references.length > 0) {
@@ -83,7 +85,7 @@ export function Demo(): React.JSX.Element {
     }, DEBOUNCE_MS);
 
     return () => window.clearTimeout(timer);
-  }, [manuscript, citationsText, format, throwOnMissing]);
+  }, [manuscript, citationsText, format, throwOnMissing, groupAdjacent]);
 
   const onLoadExample = (): void => {
     setManuscript(exampleManuscript);
@@ -116,7 +118,11 @@ export function Demo(): React.JSX.Element {
             <code className="font-mono text-[0.9em] rounded-md bg-background px-1.5 py-0.5 text-foreground">
               cite-formatter
             </code>{" "}
-            package from npm — no mocks.
+            package from npm —{" "}
+            <code className="font-mono text-[0.9em] rounded-md bg-background px-1.5 py-0.5 text-foreground">
+              cite-formatter
+            </code>{" "}
+            (currently <code className="font-mono text-[0.9em] rounded-md bg-background px-1 py-0.5">^0.3.0</code>) — no mocks.
           </p>
         </div>
 
@@ -140,7 +146,21 @@ export function Demo(): React.JSX.Element {
               </Select>
             </div>
 
-            <label className="ml-auto flex items-center gap-2 text-[13px] text-muted-foreground cursor-pointer select-none">
+            <label className="flex items-center gap-2 text-[13px] text-muted-foreground cursor-pointer select-none">
+              <Checkbox
+                checked={groupAdjacent}
+                onCheckedChange={(v) => setGroupAdjacent(v === true)}
+                id="group-toggle"
+              />
+              <span>
+                Merge adjacent{" "}
+                <code className="font-mono text-[11px] rounded bg-background px-1 py-0.5 text-foreground">
+                  [CITE:…]
+                </code>
+              </span>
+            </label>
+
+            <label className="flex items-center gap-2 text-[13px] text-muted-foreground cursor-pointer select-none md:ml-auto">
               <Checkbox
                 checked={throwOnMissing}
                 onCheckedChange={(v) => setThrowOnMissing(v === true)}
@@ -169,11 +189,17 @@ export function Demo(): React.JSX.Element {
                   Manuscript
                 </span>
                 <span className="text-[11px] text-muted-foreground">
-                  Markdown with{" "}
                   <code className="font-mono text-[10.5px] rounded bg-background px-1 py-px">
                     [CITE:id]
-                  </code>{" "}
-                  placeholders
+                  </code>
+                  , optional{" "}
+                  <code className="font-mono text-[10.5px] rounded bg-background px-1 py-px">
+                    |p=…
+                  </code>
+                  ,{" "}
+                  <code className="font-mono text-[10.5px] rounded bg-background px-1 py-px">
+                    |narrative
+                  </code>
                 </span>
               </div>
               <textarea
